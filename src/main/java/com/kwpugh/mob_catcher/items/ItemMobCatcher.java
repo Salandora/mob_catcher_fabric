@@ -15,20 +15,16 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ItemMobCatcher extends Item
-{
+public class ItemMobCatcher extends Item {
     public ItemMobCatcher(Settings settings)
     {
         super(settings);
     }
 
-    @SuppressWarnings("resource")
-    public ActionResult useOnBlock(ItemUsageContext context)
-    {
+    public ActionResult useOnBlock(ItemUsageContext context) {
         ItemStack stack = context.getStack();
         if(!(context.getWorld() instanceof ServerWorld)) return ActionResult.SUCCESS;
-        if(!context.getWorld().isClient && stack.hasNbt() && stack.getNbt().contains("captured_entity"))
-        {
+        if(!context.getWorld().isClient && stack.hasNbt() && stack.getNbt().contains("captured_entity")) {
             CatcherUtil.respawnEntity(context, stack);
 
             return ActionResult.SUCCESS;
@@ -39,18 +35,15 @@ public class ItemMobCatcher extends Item
 
     // Have glint if it contains a mob
     @Override
-    public boolean hasGlint(ItemStack stack)
-    {
+    public boolean hasGlint(ItemStack stack) {
         return stack.hasNbt() && !stack.getOrCreateSubNbt("captured_entity").isEmpty();
     }
 
     @Environment(EnvType.CLIENT)
-    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext tooltipContext)
-    {
+    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
         tooltip.add(Text.translatable("item.mob_catcher.mob_catcher.tip1").formatted(Formatting.GREEN));
 
-        if (stack.hasNbt() && !stack.getOrCreateSubNbt("captured_entity").isEmpty())
-        {
+        if (stack.hasNbt() && !stack.getOrCreateSubNbt("captured_entity").isEmpty()) {
             tooltip.add((Text.translatable("item.mob_catcher.mob_catcher.tip3", stack.getNbt().getString("name")).formatted(Formatting.YELLOW)));
         }
     }

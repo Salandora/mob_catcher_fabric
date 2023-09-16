@@ -5,20 +5,21 @@ import com.kwpugh.mob_catcher.events.EntityInteractEvent;
 import com.kwpugh.mob_catcher.init.ItemInit;
 import com.kwpugh.mob_catcher.init.TagInit;
 import com.kwpugh.mob_catcher.util.MobCatcherGroup;
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
-import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class MobCatcher implements ModInitializer
-{
+public class MobCatcher implements ModInitializer {
     public static final String MOD_ID = "mob_catcher";
-    public static final ModConfig CONFIG = AutoConfig.register(ModConfig.class, PartitioningSerializer.wrap(JanksonConfigSerializer::new)).getConfig();
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+    public static ModConfig CONFIG;
 
     @Override
-    public void onInitialize()
-    {
+    public void onInitialize() {
+        CONFIG = ModConfig.loadConfigFile();
+
         TagInit.register();
         ItemInit.register();
         MobCatcherGroup.addGroup();

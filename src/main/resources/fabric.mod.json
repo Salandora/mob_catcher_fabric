@@ -6,11 +6,12 @@
   "name": "Mob Catcher",
   "description": "Provides an item that allows for the capture/release of various mobs",
   "authors": [
-    "kwpugh"
+    "kwpugh",
+    "Salandora"
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/mob-catcher-fabric",
-    "sources": "https://github.com/kwpugh/mob_catcher_catcher_fabric-1.17/issues"
+    "sources": "https://github.com/salandora/mob_catcher_catcher_fabric/issues"
   },
 
   "license": "MIT",
@@ -20,20 +21,20 @@
   "entrypoints": {
     "main": [
       "com.kwpugh.mob_catcher.MobCatcher"
+    ],
+    "fabric-datagen": [
+      "com.kwpugh.mob_catcher.data.MobCatcherDataGen"
+    ],
+    "modmenu": [
+      "com.kwpugh.mob_catcher.compat.modmenu.ModMenuIntegration"
     ]
   },
-  "mixins": [
-    "mob_catcher.mixins.json"
-  ],
 
   "depends": {
-    "fabricloader": ">=0.14.10",
-    "fabric": "*",
-    "minecraft": "1.19.x",
+    "fabricloader": ">=0.14.22",
+    "fabric": ">=0.88.1",
+    "minecraft": "1.20.1",
     "java": ">=17",
-    "cloth-config2": "*"
-  },
-  "suggests": {
-    "another-mod": "*"
+    "cloth-config2": ">=11.1.106"
   }
 }
